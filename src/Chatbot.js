@@ -1,6 +1,8 @@
 import React, { useState, useEffect,useRef } from 'react';
 import { Rnd } from 'react-rnd';
 
+const BASE_URL = "https://david-cavazos.github.io/";
+
 const Chatbot = () => {
     const [isMinimized, setIsMinimized] = useState(true);
     const [size, setSize] = useState({ width: 388, height: 447 });
@@ -77,7 +79,7 @@ const Chatbot = () => {
 
             try {
                 // Stream response from the backend
-                const response = await fetch("http://127.0.0.1:8000/chat", {
+                const response = await fetch(`${BASE_URL}/chat`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
