@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useRef } from 'react';
 import { Rnd } from 'react-rnd';
 
-const BASE_URL = "https://david-cavazos.github.io/";
+const BASE_URL = "https://e3841e79-3eae-49cb-ae66-7474040b4750-00-2qhjyey8f19ud.worf.replit.dev";
 
 const Chatbot = () => {
     const [isMinimized, setIsMinimized] = useState(true);
