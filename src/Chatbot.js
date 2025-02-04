@@ -228,7 +228,7 @@ const Chatbot = () => {
                     }}
                     minWidth={300}
                     minHeight={400}
-                    style={{ zIndex: 1000 }}
+                    style={{ zIndex: 1000, pointerEvents: "none", }}
                 >
                     <div
                         style={{
@@ -241,6 +241,7 @@ const Chatbot = () => {
                             backgroundColor: 'rgba(255, 255, 255, 0.35)',
                             backdropFilter: 'blur(25px)',
                             WebkitBackdropFilter: 'blur(25px)',
+                            pointerEvents: "auto", 
                         }}
                     >
                         <div
@@ -254,6 +255,7 @@ const Chatbot = () => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
+                                pointerEvents: "auto", // Ensure the header is also clickable
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -273,6 +275,7 @@ const Chatbot = () => {
                                     cursor: 'pointer',
                                     fontSize: '16px',
                                     marginRight: '10px',
+                                    pointerEvents: "auto", // Ensure close button is clickable
                                 }}
                             >
                                 ✕
@@ -290,6 +293,7 @@ const Chatbot = () => {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
+                pointerEvents: "auto", // Allow clicking inside messages
               }}
             >
                             {/* Render all finalized messages */}
@@ -307,6 +311,7 @@ const Chatbot = () => {
                                         fontSize: "15px",
                                         fontWeight: "500",
                                         fontFamily: "Arial, sans-serif",
+                                        pointerEvents: "auto", // Ensure messages can be interacted with
                                     }}
                                 >
                                     {message.isHtml ? (
@@ -365,6 +370,7 @@ const Chatbot = () => {
                                     fontSize: '15px',
                                     fontWeight: '500',
                                     fontFamily: 'Arial, sans-serif',
+                                    pointerEvents: "auto", // Ensure typing is possible
                                 }}
                             />
                             <button
@@ -381,6 +387,7 @@ const Chatbot = () => {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     cursor: 'pointer',
+                                    pointerEvents: "auto", // Ensure button is clickable
                                 }}
                             >
                                 <img
