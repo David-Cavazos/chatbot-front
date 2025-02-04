@@ -11,7 +11,7 @@ const App = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100vh',
-                backgroundColor: '#f9f9f9',
+                backgroundColor: 'transparent',
             }}
         >
             <Chatbot />
