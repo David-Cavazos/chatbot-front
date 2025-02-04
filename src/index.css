@@ -31,5 +31,5 @@ code {
 #chatbot-container, #chatbot-button {
   pointer-events: auto; /* Ensure only chatbot & button are clickable */
   position: absolute;
-  z-index: 1000; /* Keep above background */
+  z-index: 10001; /* Keep above background */
 }
