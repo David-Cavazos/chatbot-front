@@ -45,7 +45,7 @@ const Chatbot = () => {
     
     useLayoutEffect(() => {
         sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
-    }, [size]);
+    }, [size,position]);
 
     
 
@@ -216,10 +216,13 @@ const Chatbot = () => {
                 <Rnd
                     size={{ width: size.width, height: size.height }}
                     position={{ x: position.x, y: position.y }}
-                    onDragStop={(e, d) => {
-                        setPosition({ x: d.x, y: d.y });
+                    onDrag={(e, d) => {
+                        setPosition((prev) => {
+                            const newPosition = { x: d.x, y: d.y };
+                            return newPosition;
+                        });
                     }}
-                    onResizeStop={(e, direction, ref, delta, position) => {
+                    onResize={(e, direction, ref, delta, position) => {
                         setSize({ width: ref.offsetWidth, height: ref.offsetHeight });
                         setPosition(position);
                     }}
