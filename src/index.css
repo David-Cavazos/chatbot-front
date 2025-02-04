@@ -1,5 +1,6 @@
 body {
   margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,3 +13,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Make the entire page background click-through */
+html, body {
+  background: transparent;
+  pointer-events: none; /* Click-through */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Ensure chatbot and button remain clickable */
+#chatbot-container, #chatbot-button {
+  pointer-events: auto; /* Make chatbot & button clickable */
+}
+
