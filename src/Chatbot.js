@@ -194,6 +194,7 @@ const Chatbot = () => {
     
             {isMinimized ? (
                 <button
+                id="chatbot-button"
                     style={{
                         position: 'fixed',
                         bottom: '20px',
@@ -231,6 +232,7 @@ const Chatbot = () => {
                     style={{ zIndex: 1000, pointerEvents: "none", }}
                 >
                     <div
+                    id="chatbot-container"
                         style={{
                             width: '100%',
                             height: '100%',
