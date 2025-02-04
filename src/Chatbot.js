@@ -17,8 +17,8 @@ const Chatbot = () => {
 
     const sendSizeAndPositionToBubble = () => {
         const message = {
-            width: isMinimized ? 50 : size.width, // Minimized or expanded width
-            height: isMinimized ? 50 : size.height, // Minimized or expanded height
+            width: isMinimized ? size.width : 50, // Minimized or expanded width
+            height: isMinimized ? size.height : 50, // Minimized or expanded height
             x: position.x, // Chatbot x-position
             y: position.y, // Chatbot y-position
             isMinimized, // Whether the chatbot is minimized
