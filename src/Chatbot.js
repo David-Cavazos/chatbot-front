@@ -216,7 +216,7 @@ const Chatbot = () => {
                 <Rnd
                     size={{ width: size.width, height: size.height }}
                     position={{ x: position.x, y: position.y }}
-                    bounds="parent"
+                    bounds="window"
                     onDrag={(e, d) => {
                         setPosition((prev) => {
                             const newPosition = { x: d.x, y: d.y };
