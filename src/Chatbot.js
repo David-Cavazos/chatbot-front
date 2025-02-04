@@ -1,12 +1,12 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useRef,useLayoutEffect } from 'react';
 import { Rnd } from 'react-rnd';
 
 const BASE_URL = "https://e3841e79-3eae-49cb-ae66-7474040b4750-00-2qhjyey8f19ud.worf.replit.dev";
 
 const Chatbot = () => {
     const [isMinimized, setIsMinimized] = useState(true);
-    const [size, setSize] = useState({ width: 388, height: 447 });
-    const [position, setPosition] = useState({ x: 100, y: 100 });
+    const [size, setSize] = useState({ width: 50, height: 50 });
+    const [position, setPosition] = useState({ x: 20, y: 20 });
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [firstOpen, setFirstOpen] = useState(true);
@@ -15,21 +15,38 @@ const Chatbot = () => {
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
 
-    const sendSizeAndPositionToBubble = () => {
+    const toggleMinimized = () => {
+        setIsMinimized((prev) => {
+            const newState = !prev;
+
+            if (!newState) {
+                setSize({ width: 388, height: 447 }); // Set expanded default size
+            } else {
+                setSize({ width: 50, height: 50 }); // Set minimized size explicitly
+            }
+    
+            return newState;
+        });
+        console.log("width", size.width)
+    };
+
+    
+    const sendSizeAndPositionToBubble = (minimizedState = isMinimized) => {
         const message = {
-            width: isMinimized ? 50 : size.width, // Minimized or expanded width
-            height: isMinimized ? 50 : size.height, // Minimized or expanded height
-            x: position.x, // Chatbot x-position
-            y: position.y, // Chatbot y-position
-            isMinimized, // Whether the chatbot is minimized
+            width: minimizedState ? 50 : size.width,
+            height: minimizedState ? 50 : size.height,
+            x: position.x,
+            y: position.y,
+            isMinimized: minimizedState,
         };
-        window.parent.postMessage(message, "*"); // Send the message to Bubble
+        console.log("Sending to Bubble:", message);
+        window.parent.postMessage(message, "*");
     };
     
-    useEffect(() => {
+    useLayoutEffect(() => {
         sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
-    }, [size, position, isMinimized]);
-    
+    }, [size]);
+
     
 
     
@@ -191,7 +208,7 @@ const Chatbot = () => {
                         boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
                         zIndex: 1001, // Ensure it is above everything
                     }}
-                    onClick={() => setIsMinimized(false)}
+                    onClick={toggleMinimized}
                 >
                     💬
                 </button>
@@ -245,7 +262,7 @@ const Chatbot = () => {
                                 <span style={{ fontWeight: 'bold', fontSize: '18px' }}>@{name.toLowerCase()}</span>
                             </div>
                             <button
-                                onClick={() => setIsMinimized(true)}
+                                onClick={toggleMinimized}
                                 style={{
                                     background: 'none',
                                     border: 'none',
