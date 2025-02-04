@@ -46,7 +46,7 @@ const Chatbot = () => {
     useLayoutEffect(() => {
         sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
     }, [size,position]);
-
+    
     useEffect(() => {
         const chatbotContainer = document.getElementById("chatbot-container");
         const chatbotButton = document.getElementById("chatbot-button");
@@ -219,7 +219,7 @@ const Chatbot = () => {
                         cursor: 'pointer',
                         boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
                         zIndex: 1001, // Ensure it is above everything
-                        pointerEvents: auto,
+                        pointerEvents: "auto",
                     }}
                     onClick={toggleMinimized}
                 >
