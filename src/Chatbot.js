@@ -15,7 +15,24 @@ const Chatbot = () => {
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
 
+    const sendSizeAndPositionToBubble = () => {
+        const message = {
+            width: isMinimized ? 50 : size.width, // Minimized or expanded width
+            height: isMinimized ? 50 : size.height, // Minimized or expanded height
+            x: position.x, // Chatbot x-position
+            y: position.y, // Chatbot y-position
+            isMinimized, // Whether the chatbot is minimized
+        };
+        window.parent.postMessage(message, "*"); // Send the message to Bubble
+    };
+    
+    useEffect(() => {
+        sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
+    }, [size, position, isMinimized]);
+    
+    
 
+    
     useEffect(() => {
         if (!isMinimized && firstOpen) {
             const fullMessage = `Hola, me llamo ${name}, soy un asistente virtual de IA para la Fundación CR. ¡Hazme cualquier pregunta para poder asistirte!`;
