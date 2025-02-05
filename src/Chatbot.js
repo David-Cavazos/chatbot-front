@@ -14,6 +14,8 @@ const Chatbot = () => {
     const chatContainerRef = useRef(null); // Ref for the chat container
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
+    const [lastSentPosition, setLastSentPosition] = useState({ x: 20, y: 20 });
+
 
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
@@ -39,8 +41,16 @@ const Chatbot = () => {
             y: position.y,
             isMinimized: minimizedState,
         };
-        console.log("Sending to Bubble:", message);
-        window.parent.postMessage(message, "*");
+    
+        // Only send if the position has changed
+        if (
+            message.x !== lastSentPosition.x ||
+            message.y !== lastSentPosition.y
+        ) {
+            setLastSentPosition({ x: message.x, y: message.y });
+            console.log("Sending to Bubble:", message);
+            window.parent.postMessage(message, "*");
+        }
     };
     
     useLayoutEffect(() => {
