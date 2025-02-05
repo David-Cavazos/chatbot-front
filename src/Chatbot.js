@@ -228,7 +228,6 @@ const Chatbot = () => {
                     position={{ x: position.x, y: position.y }}
                     onResize={(e, direction, ref, delta, position) => {
                         setSize({ width: ref.offsetWidth, height: ref.offsetHeight });
-                        setPosition(position);
                     }}
                     minWidth={300}
                     minHeight={400}
