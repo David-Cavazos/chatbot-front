@@ -9,7 +9,6 @@ const App = () => {
             style={{
                 display: 'inline-block',
                 backgroundColor: 'transparent',
-                pointerEvents: 'none'
             }}
 
         >
