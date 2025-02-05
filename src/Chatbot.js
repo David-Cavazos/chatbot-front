@@ -188,6 +188,7 @@ const Chatbot = () => {
                         height: "100vh",
                         backgroundColor: "transparent", // Grey overlay with transparency
                         zIndex: 999, // Keeps it behind the chatbot
+                        pointerEvents: "none",
                     }}
                 ></div>
             )}
