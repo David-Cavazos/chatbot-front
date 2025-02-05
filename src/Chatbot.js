@@ -47,17 +47,6 @@ const Chatbot = () => {
         sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
     }, [size,position]);
     
-    useEffect(() => {
-        const chatbotContainer = document.getElementById("chatbot-container");
-        const chatbotButton = document.getElementById("chatbot-button");
-    
-        if (chatbotContainer) {
-            chatbotContainer.style.pointerEvents = "auto";
-        }
-        if (chatbotButton) {
-            chatbotButton.style.pointerEvents = "auto";
-        }
-    }, []);
     
 
     
@@ -241,7 +230,7 @@ const Chatbot = () => {
                     }}
                     minWidth={300}
                     minHeight={400}
-                    style={{ zIndex: 1000, pointerEvents: "none", }}
+                    style={{ zIndex: 1000, pointerEvents: "auto", }}
                 >
                     <div
                     id="chatbot-container"
