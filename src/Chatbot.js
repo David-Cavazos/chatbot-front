@@ -42,15 +42,11 @@ const Chatbot = () => {
             isMinimized: minimizedState,
         };
     
-        // Only send if the position has changed
-        if (
-            message.x !== lastSentPosition.x ||
-            message.y !== lastSentPosition.y
-        ) {
+        
             setLastSentPosition({ x: message.x, y: message.y });
             console.log("Sending to Bubble:", message);
             window.parent.postMessage(message, "*");
-        }
+        
     };
     
     useLayoutEffect(() => {
@@ -228,13 +224,8 @@ const Chatbot = () => {
             ) : (
                 <Rnd
                     size={{ width: size.width, height: size.height }}
+                    disableDragging = {true}
                     position={{ x: position.x, y: position.y }}
-                    onDrag={(e, d) => {
-                        setPosition((prev) => {
-                            const newPosition = { x: d.x, y: d.y };
-                            return newPosition;
-                        });
-                    }}
                     onResize={(e, direction, ref, delta, position) => {
                         setSize({ width: ref.offsetWidth, height: ref.offsetHeight });
                         setPosition(position);
