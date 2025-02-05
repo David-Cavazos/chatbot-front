@@ -266,7 +266,6 @@ const Chatbot = () => {
                                     color: '#fff',
                                     cursor: 'pointer',
                                     fontSize: '16px',
-                                    marginRight: '10px',
                                 }}
                             >
                                 ✕
