@@ -194,7 +194,6 @@ const Chatbot = () => {
                         height: "100vh",
                         backgroundColor: "transparent", // Grey overlay with transparency
                         zIndex: 999, // Keeps it behind the chatbot
-                        pointerEvents: "none",
                     }}
                 ></div>
             )}
@@ -215,7 +214,7 @@ const Chatbot = () => {
                         cursor: 'pointer',
                         boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
                         zIndex: 1001, // Ensure it is above everything
-                        pointerEvents: "auto",
+
                     }}
                     onClick={toggleMinimized}
                 >
@@ -234,7 +233,7 @@ const Chatbot = () => {
                             backgroundColor: 'rgba(255, 255, 255, 0.35)',
                             backdropFilter: 'blur(25px)',
                             WebkitBackdropFilter: 'blur(25px)',
-                            pointerEvents: "auto", 
+
                         }}
                     >
                         <div
@@ -248,7 +247,7 @@ const Chatbot = () => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                pointerEvents: "auto", // Ensure the header is also clickable
+
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -268,7 +267,6 @@ const Chatbot = () => {
                                     cursor: 'pointer',
                                     fontSize: '16px',
                                     marginRight: '10px',
-                                    pointerEvents: "auto", // Ensure close button is clickable
                                 }}
                             >
                                 ✕
@@ -286,7 +284,6 @@ const Chatbot = () => {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                pointerEvents: "auto", // Allow clicking inside messages
               }}
             >
                             {/* Render all finalized messages */}
@@ -304,7 +301,6 @@ const Chatbot = () => {
                                         fontSize: "15px",
                                         fontWeight: "500",
                                         fontFamily: "Arial, sans-serif",
-                                        pointerEvents: "auto", // Ensure messages can be interacted with
                                     }}
                                 >
                                     {message.isHtml ? (
@@ -363,7 +359,6 @@ const Chatbot = () => {
                                     fontSize: '15px',
                                     fontWeight: '500',
                                     fontFamily: 'Arial, sans-serif',
-                                    pointerEvents: "auto", // Ensure typing is possible
                                 }}
                             />
                             <button
@@ -380,7 +375,7 @@ const Chatbot = () => {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     cursor: 'pointer',
-                                    pointerEvents: "auto", // Ensure button is clickable
+
                                 }}
                             >
                                 <img
