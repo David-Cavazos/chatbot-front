@@ -222,17 +222,6 @@ const Chatbot = () => {
                     💬
                 </button>
             ) : (
-                <Rnd
-                    size={{ width: size.width, height: size.height }}
-                    disableDragging = {true}
-                    position={{ x: position.x, y: position.y }}
-                    onResize={(e, direction, ref, delta, position) => {
-                        setSize({ width: ref.offsetWidth, height: ref.offsetHeight });
-                    }}
-                    minWidth={300}
-                    minHeight={400}
-                    style={{ zIndex: 1000, pointerEvents: "auto", }}
-                >
                     <div
                     id="chatbot-container"
                         style={{
@@ -402,7 +391,6 @@ const Chatbot = () => {
                             </button>
                         </div>
                     </div>
-                </Rnd>
             )}
         </>
     );
