@@ -1,9 +1,13 @@
 import React, { useState, useEffect,useRef,useLayoutEffect } from 'react';
 import { Rnd } from 'react-rnd';
+import { useLocation } from "react-router-dom";
 
 const BASE_URL = "https://e3841e79-3eae-49cb-ae66-7474040b4750-00-2qhjyey8f19ud.worf.replit.dev";
 
 const Chatbot = () => {
+    const location = useLocation();  // Gets the full URL
+    const searchParams = new URLSearchParams(location.search); 
+    const chatbotId = searchParams.get("chatbot_id") || "NA"; 
     const [isMinimized, setIsMinimized] = useState(true);
     const [size, setSize] = useState({ width: 50, height: 50 });
     const [position, setPosition] = useState({ x: 20, y: 20 });
@@ -124,7 +128,7 @@ const Chatbot = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ user_message: userMessage }),
+                    body: JSON.stringify({ user_message: userMessage, chatbot_id: chatbotId }),
                 });
 
                 if (!response.body) {
