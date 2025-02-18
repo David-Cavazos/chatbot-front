@@ -60,9 +60,9 @@ const Chatbot = () => {
         
     };
     
-    useLayoutEffect(() => {
-        sendSizeAndPositionToBubble(isMinimized); // Send updates whenever size, position, or state changes
-    }, [isMinimized,size,position]);
+    useEffect(() => {
+        sendSizeAndPositionToBubble();
+    }, [isMinimized, size, position]); 
     
     
 
