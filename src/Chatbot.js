@@ -30,7 +30,7 @@ const Chatbot = () => {
             const message = {
                 width: "300",
                 height: "300",
-            }
+            };
 
             // Send message to parent window to update iframe size
             window.parent.postMessage(message, "*");
