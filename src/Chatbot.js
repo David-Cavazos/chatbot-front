@@ -221,6 +221,9 @@ const Chatbot = () => {
                         cursor: 'pointer',
                         boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
                         zIndex: 1001, // Ensure it is above everything
+                        padding: '5px',  // Extra padding inside the button
+                        margin: '10px',  // Space around the button inside the iframe
+                        backgroundClip: 'padding-box', // Prevents shadow cutoff
 
                     }}
                     onClick={toggleMinimized}
