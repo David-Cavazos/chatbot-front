@@ -18,7 +18,7 @@ const Chatbot = () => {
     const chatContainerRef = useRef(null); // Ref for the chat container
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
-    const [lastSentPosition, setLastSentPosition] = useState({ x: 20, y: 20 });
+    const [lastSentPosition, setLastSentPosition] = useState({ x: 0, y: 0 });
 
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
@@ -205,203 +205,214 @@ const Chatbot = () => {
                 ></div>
             )}
     
-            {isMinimized ? (
-                <button
-                id="chatbot-button"
-                    style={{
-                        position: 'fixed',
-                        bottom: '0px',
-                        right: '0px',
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(275deg, #ff002c, #d100ff)',
-                        color: '#fff',
-                        border: 'none',
-                        cursor: 'pointer',
-                        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-                        zIndex: 1001, // Ensure it is above everything
-                        padding: '5px',  // Extra padding inside the button
-                        margin: '10px',  // Space around the button inside the iframe
-                        backgroundClip: 'padding-box', // Prevents shadow cutoff
+    {isMinimized ? (
+    <button
+        id="chatbot-button"
+        style={{
+            position: 'fixed',
+            bottom: '0px',
+            right: '0px',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: 'linear-gradient(275deg, #ff002c, #d100ff)',
+            color: '#fff',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+            zIndex: 1001, // Ensure it is above everything
+            padding: '5px',  // Extra padding inside the button
+            margin: '10px',  // Space around the button inside the iframe
+            backgroundClip: 'padding-box', // Prevents shadow cutoff
+        }}
+        onClick={toggleMinimized}
+    >
+        💬
+    </button>
+) : (
+    <div
+        id="chatbot-container"
+        style={{
+            width: '100%',
+            height: '100%',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '15px',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+            backgroundColor: 'rgba(255, 255, 255, 0.35)',
+            backdropFilter: 'blur(25px)',
+            WebkitBackdropFilter: 'blur(25px)',
+            
+            backgroundClip: 'padding-box',
+        }}
+    >
+        {/* ✅ HEADER (No Border Applied) */}
+        <div
+            style={{
+                position: 'relative',
+                padding: '5px',
+                background: 'linear-gradient(150deg, #f00, #f0f)',
+                color: '#fff',
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            }}
+        >
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                    src="https://imgur.com/MbK4TX7.jpg"
+                    alt="Chat image"
+                    style={{ width: '40px', height: '40px', marginRight: '15px', marginLeft: '5px' }}
+                />
+                <span style={{ fontWeight: 'bold', fontSize: '18px' }}>@{name.toLowerCase()}</span>
+            </div>
+            <button
+                onClick={toggleMinimized}
+                style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#fff',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                }}
+            >
+                ✕
+            </button>
+        </div>
 
-                    }}
-                    onClick={toggleMinimized}
-                >
-                    💬
-                </button>
-            ) : (
+        {/* ✅ MAIN CHAT CONTAINER (WITH BORDER) */}
+        <div
+            id="chat-content"
+            style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: '#fff',  // Ensures white background
+                borderRadius: '0 0 15px 15px', // Rounded only at the bottom
+                border: '1px solid #cccccc', // ✅ Grey border added only to the chat content
+                overflow: 'hidden', // Prevents weird scroll issues
+                borderTop: 'none',
+                padding: '10px', // Keeps content from touching the border
+            }}
+        >
+            <div
+                ref={chatContainerRef}
+                onScroll={handleScroll}
+                style={{
+                    flex: 1,
+                    overflowY: 'auto',
+                    padding: '10px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                {/* Render all finalized messages */}
+                {messages.map((message, index) => (
                     <div
-                    id="chatbot-container"
+                        key={index}
                         style={{
-                            width: '100%',
-                            height: '100%',
-                            position: 'fixed', 
-                            top: '0', 
-                            left: '0', 
-                            display: 'flex',
-                            flexDirection: 'column',
-                            borderRadius: '15px',
-                            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
-                            backgroundColor: 'rgba(255, 255, 255, 0.35)',
-                            backdropFilter: 'blur(25px)',
-                            WebkitBackdropFilter: 'blur(25px)',
-                            margin: '10px',  // Space around the button inside the iframe
-                            backgroundClip: 'padding-box',
-
-
+                            background: message.type === "user" ? "linear-gradient(30deg, #f00, #f0f)" : "#f1f1f1",
+                            color: message.type === "user" ? "#fff" : "#000",
+                            padding: "10px",
+                            borderRadius: "10px",
+                            marginBottom: "10px",
+                            maxWidth: "80%",
+                            alignSelf: message.type === "user" ? "flex-end" : "flex-start",
+                            fontSize: "15px",
+                            fontWeight: "500",
+                            fontFamily: "Arial, sans-serif",
                         }}
                     >
-                        <div
-                            style={{
-                                position: 'relative',
-                                padding: '5px',
-                                background: 'linear-gradient(150deg, #f00, #f0f)',
-                                color: '#fff',
-                                borderTopLeftRadius: '10px',
-                                borderTopRightRadius: '10px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-
-                            }}
-                        >
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <img
-                                    src="https://imgur.com/MbK4TX7.jpg"
-                                    alt="Chat image"
-                                    style={{ width: '40px', height: '40px', marginRight: '15px', marginLeft: '5px' }}
-                                />
-                                <span style={{ fontWeight: 'bold', fontSize: '18px' }}>@{name.toLowerCase()}</span>
-                            </div>
-                            <button
-                                onClick={toggleMinimized}
-                                style={{
-                                    background: 'none',
-                                    border: 'none',
-                                    color: '#fff',
-                                    cursor: 'pointer',
-                                    fontSize: '16px',
-                                }}
-                            >
-                                ✕
-                            </button>
-                        </div>
-
-
-
-                        <div
-              ref={chatContainerRef} // Attach ref to chat container
-              onScroll={handleScroll} // Handle scroll events
-              style={{
-                flex: 1,
-                padding: "10px",
-                overflowY: "auto",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-                            {/* Render all finalized messages */}
-                            {messages.map((message, index) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        background: message.type === "user" ? "linear-gradient(30deg, #f00, #f0f)" : "#f1f1f1",
-                                        color: message.type === "user" ? "#fff" : "#000",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                        marginBottom: "10px",
-                                        maxWidth: "80%",
-                                        alignSelf: message.type === "user" ? "flex-end" : "flex-start",
-                                        fontSize: "15px",
-                                        fontWeight: "500",
-                                        fontFamily: "Arial, sans-serif",
-                                    }}
-                                >
-                                    {message.isHtml ? (
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: message.content,
-                                            }}
-                                        />
-                                    ) : (
-                                        message.content
-                                    )}
-                                </div>
-                            ))}
-
-                            {/* Show streaming message at the bottom */}
-                            {streamingMessage && (
-                                <div
-                                    style={{
-                                        background: "#f1f1f1",
-                                        color: "#000",
-                                        padding: "10px",
-                                        borderRadius: "10px",
-                                        marginBottom: "10px",
-                                        maxWidth: "80%",
-                                        alignSelf: "flex-start",
-                                        fontSize: "15px",
-                                        fontWeight: "500",
-                                        fontFamily: "Arial, sans-serif",
-                                    }}
-                                    dangerouslySetInnerHTML={{
-                                        __html: streamingMessage,
-                                    }}
-                                >
-
-                                </div>
-                            )}
-                        </div>
-
-                        <div
-                            style={{
-                                display: 'flex',
-                                padding: '10px',
-                                borderTop: '1px solid #ccc',
-                            }}
-                        >
-                            <input
-                                type="text"
-                                placeholder="Escribe algo..."
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                style={{
-                                    flex: 1,
-                                    padding: '10px',
-                                    borderRadius: '5px',
-                                    border: '1px solid #ccc',
-                                    fontSize: '15px',
-                                    fontWeight: '500',
-                                    fontFamily: 'Arial, sans-serif',
+                        {message.isHtml ? (
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: message.content,
                                 }}
                             />
-                            <button
-                                onClick={handleSendMessage}
-                                style={{
-                                    marginLeft: '5px',
-                                    width: '40px',
-                                    height: '40px',
-                                    borderRadius: '50%',
-                                    background: 'linear-gradient(120deg, #ff002c, #d100ff)',
-                                    color: '#fff',
-                                    border: 'none',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    cursor: 'pointer',
-
-                                }}
-                            >
-                                <img
-                                    src="https://imgur.com/LkLbXtH.jpg"
-                                    alt="Send button"
-                                    style={{ maxWidth: '55%', maxHeight: '55%' }}
-                                />
-                            </button>
-                        </div>
+                        ) : (
+                            message.content
+                        )}
                     </div>
-            )}
+                ))}
+
+                {/* Show streaming message at the bottom */}
+                {streamingMessage && (
+                    <div
+                        style={{
+                            background: "#f1f1f1",
+                            color: "#000",
+                            padding: "10px",
+                            borderRadius: "10px",
+                            marginBottom: "10px",
+                            maxWidth: "80%",
+                            alignSelf: "flex-start",
+                            fontSize: "15px",
+                            fontWeight: "500",
+                            fontFamily: "Arial, sans-serif",
+                        }}
+                        dangerouslySetInnerHTML={{
+                            __html: streamingMessage,
+                        }}
+                    >
+                    </div>
+                )}
+            </div>
+
+            {/* Chat Input Section */}
+            <div
+                style={{
+                    display: 'flex',
+                    padding: '10px',
+                    borderTop: '1px solid #ccc',
+                }}
+            >
+                <input
+                    type="text"
+                    placeholder="Escribe algo..."
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    style={{
+                        flex: 1,
+                        padding: '10px',
+                        borderRadius: '5px',
+                        border: '1px solid #ccc',
+                        fontSize: '15px',
+                        fontWeight: '500',
+                        fontFamily: 'Arial, sans-serif',
+                    }}
+                />
+                <button
+                    onClick={handleSendMessage}
+                    style={{
+                        marginLeft: '5px',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(120deg, #ff002c, #d100ff)',
+                        color: '#fff',
+                        border: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}
+                >
+                    <img
+                        src="https://imgur.com/LkLbXtH.jpg"
+                        alt="Send button"
+                        style={{ maxWidth: '55%', maxHeight: '55%' }}
+                    />
+                </button>
+            </div>
+        </div>
+    </div>
+)}
+
         </>
     );
 };
