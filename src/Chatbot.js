@@ -43,30 +43,6 @@ const Chatbot = () => {
     
 
     
-    const sendSizeAndPositionToBubble = (minimizedState = isMinimized) => {
-        const updatedSize = minimizedState ? { width: 50, height: 50 } : size;
-
-        const message = {
-        type: "resizeIframe", // ✅ Ensure Bubble.io script recognizes it
-        width: updatedSize.width,
-        height: updatedSize.height,
-        isMinimized: minimizedState
-    };
-    
-        
-            setLastSentPosition({ x: message.x, y: message.y });
-            console.log("Sending to Bubble:", message);
-            window.parent.postMessage(message, "*");
-        
-    };
-    
-    useEffect(() => {
-        sendSizeAndPositionToBubble();
-    }, [isMinimized, size, position]); 
-    
-    
-
-    
     useEffect(() => {
         if (!isMinimized && firstOpen) {
             const fullMessage = `Hola, me llamo ${name}, soy un asistente virtual de IA para la Fundación CR. ¡Hazme cualquier pregunta para poder asistirte!`;
