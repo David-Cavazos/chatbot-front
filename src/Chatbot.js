@@ -24,7 +24,7 @@ const Chatbot = () => {
         setIsMinimized((prev) => {
             const newState = !prev;
             const newSize = newState ? { width: 50, height: 50 } : { width: 388, height: 447 };
-    
+            console.log("WWWWWWAAAAAAA");
             setSize(newSize);
 
             const message = {
