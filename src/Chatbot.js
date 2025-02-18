@@ -28,8 +28,8 @@ const Chatbot = () => {
             setSize(newSize);
 
             const message = {
-                width: 300,
-                height: 300,
+                width: "300",
+                height: "300",
             }
 
             // Send message to parent window to update iframe size
