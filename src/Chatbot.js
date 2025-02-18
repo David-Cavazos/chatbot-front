@@ -246,6 +246,9 @@ const Chatbot = () => {
                             backgroundColor: 'rgba(255, 255, 255, 0.35)',
                             backdropFilter: 'blur(25px)',
                             WebkitBackdropFilter: 'blur(25px)',
+                            margin: '10px',  // Space around the button inside the iframe
+                            backgroundClip: 'padding-box',
+
 
                         }}
                     >
