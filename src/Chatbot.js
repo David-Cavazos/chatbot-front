@@ -31,7 +31,8 @@ const Chatbot = () => {
             window.parent.postMessage({
                 type: "resizeIframe",
                 width: newSize.width,
-                height: newSize.height
+                height: newSize.height,
+                isMinimized: newState
             }, "*");
     
             return newState;
@@ -41,13 +42,16 @@ const Chatbot = () => {
 
     
     const sendSizeAndPositionToBubble = (minimizedState = isMinimized) => {
+        const updatedSize = minimizedState ? { width: 50, height: 50 } : size;
+
         const message = {
-            width: minimizedState ? 50 : size.width,
-            height: minimizedState ? 50 : size.height,
-            x: position.x,
-            y: position.y,
-            isMinimized: minimizedState,
-        };
+        type: "resizeIframe", // ✅ Ensure Bubble.io script recognizes it
+        width: updatedSize.width,
+        height: updatedSize.height,
+        x: position.x,
+        y: position.y,
+        isMinimized: minimizedState
+    };
     
         
             setLastSentPosition({ x: message.x, y: message.y });
@@ -57,8 +61,8 @@ const Chatbot = () => {
     };
     
     useLayoutEffect(() => {
-        sendSizeAndPositionToBubble(); // Send updates whenever size, position, or state changes
-    }, [size,position]);
+        sendSizeAndPositionToBubble(isMinimized); // Send updates whenever size, position, or state changes
+    }, [isMinimized,size,position]);
     
     
 
