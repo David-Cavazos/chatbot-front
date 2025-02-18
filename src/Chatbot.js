@@ -20,21 +20,24 @@ const Chatbot = () => {
     const name = "Cassandra"; // Variable name for the chatbot
     const [lastSentPosition, setLastSentPosition] = useState({ x: 20, y: 20 });
 
-
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
             const newState = !prev;
-
-            if (!newState) {
-                setSize({ width: 388, height: 447 }); // Set expanded default size
-            } else {
-                setSize({ width: 50, height: 50 }); // Set minimized size explicitly
-            }
+            const newSize = newState ? { width: 50, height: 50 } : { width: 388, height: 447 };
+    
+            setSize(newSize);
+    
+            // Send message to parent window to update iframe size
+            window.parent.postMessage({
+                type: "resizeIframe",
+                width: newSize.width,
+                height: newSize.height
+            }, "*");
     
             return newState;
         });
-        console.log("width", size.width)
     };
+    
 
     
     const sendSizeAndPositionToBubble = (minimizedState = isMinimized) => {
