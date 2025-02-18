@@ -10,7 +10,7 @@ const Chatbot = () => {
     const chatbotId = searchParams.get("chatbot_id") || "NA"; 
     const [isMinimized, setIsMinimized] = useState(true);
     const [size, setSize] = useState({ width: 50, height: 50 });
-    const [position, setPosition] = useState({ x: 20, y: 20 });
+    const [position, setPosition] = useState({ x: 0, y: 0 });
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [firstOpen, setFirstOpen] = useState(true);
