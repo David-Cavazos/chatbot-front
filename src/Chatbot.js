@@ -210,8 +210,8 @@ const Chatbot = () => {
                 id="chatbot-button"
                     style={{
                         position: 'fixed',
-                        bottom: '20px',
-                        right: '20px',
+                        bottom: '0px',
+                        right: '0px',
                         width: '50px',
                         height: '50px',
                         borderRadius: '50%',
@@ -233,6 +233,9 @@ const Chatbot = () => {
                         style={{
                             width: '100%',
                             height: '100%',
+                            position: 'fixed', 
+                            top: '0', 
+                            left: '0', 
                             display: 'flex',
                             flexDirection: 'column',
                             borderRadius: '15px',
