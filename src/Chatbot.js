@@ -28,10 +28,8 @@ const Chatbot = () => {
             setSize(newSize);
 
             const message = {
-                type: "resizeIframe", // ✅ Ensure Bubble.io script recognizes it
                 width: newSize.width,
                 height: newSize.height,
-                isMinimized: newState
             }
     
             // Send message to parent window to update iframe size
