@@ -26,14 +26,16 @@ const Chatbot = () => {
             const newSize = newState ? { width: 50, height: 50 } : { width: 388, height: 447 };
     
             setSize(newSize);
-    
-            // Send message to parent window to update iframe size
-            window.parent.postMessage({
-                type: "resizeIframe",
+
+            const message = {
+                type: "resizeIframe", // ✅ Ensure Bubble.io script recognizes it
                 width: newSize.width,
                 height: newSize.height,
                 isMinimized: newState
-            }, "*");
+            }
+    
+            // Send message to parent window to update iframe size
+            window.parent.postMessage(message, "*");
     
             return newState;
         });
@@ -48,8 +50,6 @@ const Chatbot = () => {
         type: "resizeIframe", // ✅ Ensure Bubble.io script recognizes it
         width: updatedSize.width,
         height: updatedSize.height,
-        x: position.x,
-        y: position.y,
         isMinimized: minimizedState
     };
     
