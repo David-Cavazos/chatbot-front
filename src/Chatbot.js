@@ -32,12 +32,16 @@ const Chatbot = () => {
                 height: "300",
             };
 
+            window.parent.postMessage(
+                JSON.stringify({ type: "FROM_CHATBOT", message: "Hello from React!" }),
+                "*"
+            );
+
             // Send message to parent window to update iframe size
             
     
             return newState;
         });
-        window.parent.postMessage({ type: "FROM_CHATBOT", message: "Hello from React!" }, "*");
     };
     
 
