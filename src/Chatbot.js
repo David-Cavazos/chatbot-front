@@ -50,7 +50,10 @@ const Chatbot = () => {
         if (!isMinimized && firstOpen) {
             const fullMessage = `Hola, me llamo ${name}, soy un asistente virtual de IA para la Fundación CR. ¡Hazme cualquier pregunta para poder asistirte!`;
             let index = 0;
-            window.parent.postMessage({ type: "FROM_CHATBOT", message: "Hello from React1!" }, "*");
+            window.parent.postMessage(
+                JSON.stringify({ type: "FROM_CHATBOT", message: "Hello from React!" }),
+                "*"
+            );
             // Start streaming immediately with the first character
             setStreamingMessage(fullMessage[index]);
 
