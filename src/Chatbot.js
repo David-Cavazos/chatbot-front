@@ -202,8 +202,8 @@ const Chatbot = () => {
             bottom: '50%',  /* ✅ Center vertically */
             right: '50%',  /* ✅ Center horizontally */
             transform: 'translate(50%, 50%)',
-            width: '50px',
-            height: '50px',
+            width: '80px',
+            height: '80px',
             borderRadius: '50%',
             background: 'linear-gradient(275deg, #ff002c, #d100ff)',
             color: '#fff',
