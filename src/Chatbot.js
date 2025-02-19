@@ -46,11 +46,11 @@ const Chatbot = () => {
         if (!isMinimized && firstOpen) {
             const fullMessage = `Hola, me llamo ${name}, soy un asistente virtual de IA para la Fundación CR. ¡Hazme cualquier pregunta para poder asistirte!`;
             let index = 0;
-
+            window.parent.postMessage({ type: "FROM_CHATBOT", message: "Hello from React1!" }, "*");
             // Start streaming immediately with the first character
             setStreamingMessage(fullMessage[index]);
 
-
+            
             const interval = setInterval(() => {
                 console.log(fullMessage.length)
                 if (index < fullMessage.length - 1) {
