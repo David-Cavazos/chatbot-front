@@ -51,6 +51,7 @@ const Chatbot = () => {
             const message = {
                 width: 388,
                 height: 447,
+                type: "message",
             }
             window.parent.postMessage(
                 message,
@@ -197,8 +198,10 @@ const Chatbot = () => {
     <button
         id="chatbot-button"
         style={{
-            position: 'fixed',
-            bottom: '0px',
+            position: 'absolute', /* ✅ Change from fixed to absolute */
+            bottom: '50%',  /* ✅ Center vertically */
+            right: '50%',  /* ✅ Center horizontally */
+            transform: 'translate(50%, 50%)',
             right: '0px',
             width: '50px',
             height: '50px',
