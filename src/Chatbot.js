@@ -28,14 +28,11 @@ const Chatbot = () => {
             setSize(newSize);
 
             const message = {
-                width: "300",
-                height: "300",
-            };
+                width: newSize.width,
+                height: newSize.height,
+            }
 
-            window.parent.postMessage(
-                JSON.stringify({ type: "FROM_CHATBOT", message: "Hello from React!" }),
-                "*"
-            );
+            window.parent.postMessage(message, "*");
 
             // Send message to parent window to update iframe size
             
@@ -50,8 +47,12 @@ const Chatbot = () => {
         if (!isMinimized && firstOpen) {
             const fullMessage = `Hola, me llamo ${name}, soy un asistente virtual de IA para la Fundación CR. ¡Hazme cualquier pregunta para poder asistirte!`;
             let index = 0;
+            const message = {
+                width: 388,
+                height: 447,
+            }
             window.parent.postMessage(
-                JSON.stringify({ type: "FROM_CHATBOT", message: "Hello from React!" }),
+                message,
                 "*"
             );
             // Start streaming immediately with the first character
