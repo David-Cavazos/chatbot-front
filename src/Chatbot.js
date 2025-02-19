@@ -30,6 +30,7 @@ const Chatbot = () => {
             const message = {
                 width: newSize.width,
                 height: newSize.height,
+                type: "message",
             }
 
             window.parent.postMessage(message, "*");
