@@ -202,7 +202,6 @@ const Chatbot = () => {
             bottom: '50%',  /* ✅ Center vertically */
             right: '50%',  /* ✅ Center horizontally */
             transform: 'translate(50%, 50%)',
-            right: '0px',
             width: '50px',
             height: '50px',
             borderRadius: '50%',
