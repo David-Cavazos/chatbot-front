@@ -27,7 +27,10 @@ code {
 }
 
 /* Ensure chatbot and button remain clickable */
-#chatbot-container, #chatbot-button {
+#chatbot-container {
   position: absolute;
+  z-index: 10001; /* Keep above background */
+}
+#chatbot-button {
   z-index: 10001; /* Keep above background */
 }
