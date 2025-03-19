@@ -19,6 +19,15 @@ const Chatbot = () => {
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
     const [lastSentPosition, setLastSentPosition] = useState({ x: 0, y: 0 });
+    
+    const [userId, setUserId] = useState(() => {
+        let storedUserId = localStorage.getItem("chatbot_user_id");
+        if (!storedUserId) {
+            storedUserId = Math.random().toString(36).substring(2, 15);
+            localStorage.setItem("chatbot_user_id", storedUserId);
+        }
+        return storedUserId;
+    });
 
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
@@ -100,6 +109,9 @@ const Chatbot = () => {
     }
   };
 
+  
+
+
 
     // Function to send user message to the backend and stream the response
     const handleSendMessage = async () => {
@@ -115,12 +127,13 @@ const Chatbot = () => {
 
             try {
                 // Stream response from the backend
+                const userId = Math.random().toString(36).substring(2, 15);
                 const response = await fetch(`${BASE_URL}/chat`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ user_message: userMessage, chatbot_id: chatbotId }),
+                    body: JSON.stringify({ user_message: userMessage, chatbot_id: chatbotId, user_id: userId }),
                 });
 
                 if (!response.body) {
