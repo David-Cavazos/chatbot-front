@@ -19,12 +19,16 @@ const Chatbot = () => {
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
     const [lastSentPosition, setLastSentPosition] = useState({ x: 0, y: 0 });
-    
-    const [userId, setUserId] = useState(() => {
+
+    const [session_id, setUserId] = useState(() => {
         let storedUserId = localStorage.getItem("chatbot_user_id");
         if (!storedUserId) {
             storedUserId = Math.random().toString(36).substring(2, 15);
             localStorage.setItem("chatbot_user_id", storedUserId);
+            console.log("new user id");
+        }
+        else{
+            console.log("user id found", storedUserId);
         }
         return storedUserId;
     });
@@ -127,13 +131,13 @@ const Chatbot = () => {
 
             try {
                 // Stream response from the backend
-                const userId = Math.random().toString(36).substring(2, 15);
+                console.log("userid: ", session_id)
                 const response = await fetch(`${BASE_URL}/chat`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ user_message: userMessage, chatbot_id: chatbotId, user_id: userId }),
+                    body: JSON.stringify({ user_message: userMessage, chatbot_id: chatbotId, session_id: session_id }),
                 });
 
                 if (!response.body) {
