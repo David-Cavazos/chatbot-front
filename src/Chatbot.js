@@ -19,6 +19,8 @@ const Chatbot = () => {
     const isUserScrolledUp = useRef(false); // Track if user has scrolled up
     const name = "Cassandra"; // Variable name for the chatbot
     const [lastSentPosition, setLastSentPosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+
 
     const [session_id, setUserId] = useState(() => {
         let storedUserId = localStorage.getItem("chatbot_user_id");
@@ -39,6 +41,11 @@ const Chatbot = () => {
             const newSize = newState ? { width: 50, height: 50 } : { width: 388, height: 447 };
             console.log("WWWWWWAAAAAAA");
             setSize(newSize);
+            
+            if (!newState) {
+                setIsHovered(false);
+            }
+          
 
             const message = {
                 width: newSize.width,
@@ -212,37 +219,55 @@ const Chatbot = () => {
             )}
     
     {isMinimized ? (
-    <button
-        id="chatbot-button"
-        style={{
-            position: 'absolute', /* ✅ Change from fixed to absolute */
-            bottom: '50%',  /* ✅ Center vertically */
-            right: '50%',  /* ✅ Center horizontally */
-            transform: 'translate(50%, 50%)',
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            background: 'linear-gradient(275deg, #ff002c, #d100ff)',
-            color: '#fff',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-            zIndex: 1001, // Ensure it is above everything
-            padding: '5px',  // Extra padding inside the button
-            margin: '10px',  // Space around the button inside the iframe
-            backgroundClip: 'padding-box', // Prevents shadow cutoff
-        }}
-        onClick={toggleMinimized}
-    >
-        💬
-    </button>
+  <button
+    id="chatbot-button"
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
+    onClick={toggleMinimized}
+    style={{
+        position: 'absolute',
+        bottom: '50%',
+        right: '50%',
+        transform: 'translate(50%, 50%)',
+        minHeight: '50px',
+        minWidth: '50px',
+        maxWidth: isHovered ? '320px' : '50px',
+        padding: isHovered ? '10px 15px' : '0',
+        borderRadius: '25px',
+        color: '#fff',
+        border: 'none',
+        cursor: 'pointer',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+        zIndex: 1001,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: isHovered ? 'flex-start' : 'center',
+        transition: 'max-width 0.3s ease, padding 0.3s ease',
+        fontSize: '15px',
+        fontWeight: '500',
+        fontFamily: 'Arial, sans-serif',
+        whiteSpace: isHovered ? 'normal' : 'nowrap',
+        overflow: 'hidden',
+        textAlign: 'left',
+        lineHeight: '1.3',
+    }}
+    className="animated-gradient"
+  >
+    
+    {isHovered && (
+      <span style={{ marginRight: '10px' }}>
+        Hola, soy Cassandra un asistente IA, ¿En qué puedo ayudarte?
+      </span>
+    )}
+    💬
+  </button>
 ) : (
     <div
         id="chatbot-container"
         style={{
             width: '100%',
             height: '100%',
-            position: 'fixed',
+            position: 'absolute',
             top: '0',
             left: '0',
             display: 'flex',
@@ -251,6 +276,7 @@ const Chatbot = () => {
             boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
             backgroundColor: 'rgba(255, 255, 255, 0.35)',
             backdropFilter: 'blur(25px)',
+            whiteSpace: isHovered ? 'normal' : 'nowrap',
             WebkitBackdropFilter: 'blur(25px)',
             
             backgroundClip: 'padding-box',
