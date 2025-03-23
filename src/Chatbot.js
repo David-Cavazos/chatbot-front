@@ -35,6 +35,18 @@ const Chatbot = () => {
         return storedUserId;
     });
 
+    useEffect(() => {
+        if (isMinimized) {
+          const message = {
+            width: isHovered ? 250 : 50, // Match the width of the hover bubble and button
+            height: 50,
+            type: "message",
+          };
+          window.parent.postMessage(message, "*");
+          console.log("working: ", message)
+        }
+      }, [isHovered]);
+
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
             const newState = !prev;
