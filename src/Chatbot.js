@@ -36,15 +36,21 @@ const Chatbot = () => {
     });
 
     useEffect(() => {
+        let timeout;
+        
         if (isMinimized) {
           const message = {
             width: isHovered ? 320 : 50, // Match the width of the hover bubble and button
             height: 50,
             type: "message",
           };
-          window.parent.postMessage(message, "*");
-          console.log("working: ", message)
+          timeout = setTimeout(() => {
+            window.parent.postMessage(message, "*");
+            console.log(message)
+          }, 100); // slight delay to prevent rapid toggling
         }
+      
+        return () => clearTimeout(timeout);
       }, [isHovered]);
 
     const toggleMinimized = () => {
