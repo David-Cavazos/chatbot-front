@@ -38,7 +38,7 @@ const Chatbot = () => {
     useEffect(() => {
         if (isMinimized) {
           const message = {
-            width: isHovered ? 250 : 50, // Match the width of the hover bubble and button
+            width: isHovered ? 320 : 50, // Match the width of the hover bubble and button
             height: 50,
             type: "message",
           };
