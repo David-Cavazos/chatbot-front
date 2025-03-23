@@ -47,7 +47,7 @@ const Chatbot = () => {
           timeout = setTimeout(() => {
             window.parent.postMessage(message, "*");
             console.log(message)
-          }, 100); // slight delay to prevent rapid toggling
+          }, 700); // slight delay to prevent rapid toggling
         }
       
         return () => clearTimeout(timeout);
