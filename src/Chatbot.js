@@ -60,9 +60,7 @@ const Chatbot = () => {
             console.log("WWWWWWAAAAAAA");
             setSize(newSize);
             
-            if (!newState) {
-                setIsHovered(false);
-            }
+            
           
 
             const message = {
@@ -239,8 +237,6 @@ const Chatbot = () => {
     {isMinimized ? (
   <button
     id="chatbot-button"
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
     onClick={toggleMinimized}
     style={{
         position: 'absolute',
