@@ -34,7 +34,7 @@ const Chatbot = () => {
         }
         return storedUserId;
     });
-/*
+
     useEffect(() => {
         let timeout;
         
@@ -52,7 +52,7 @@ const Chatbot = () => {
       
         return () => clearTimeout(timeout);
       }, [isHovered]);
-*/
+
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
             const newState = !prev;
@@ -259,7 +259,7 @@ const Chatbot = () => {
         zIndex: 1001,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: isHovered ? 'flex-start' : 'center',
+        justifyContent: isHovered ? 'space-between' : 'center',
         transition: 'max-width 0.3s ease, padding 0.3s ease',
         fontSize: '15px',
         fontWeight: '500',
@@ -273,7 +273,13 @@ const Chatbot = () => {
   >
     
     {isHovered && (
-      <span style={{ marginRight: '10px' }}>
+      <span style={{ whiteSpace: 'nowrap',
+        marginRight: '16px',
+        fontSize: '13px',
+        lineHeight: '1.2',
+        maxWidth: '200px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis', }}>
         Hola, soy Cassandra un asistente IA, ¿En qué puedo ayudarte?
       </span>
     )}
