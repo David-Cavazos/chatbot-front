@@ -260,7 +260,7 @@ const Chatbot = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: isHovered ? 'flex-start' : 'center',
-        transition: 'max-width 0.3s ease, padding 0.3s ease',
+        
         fontSize: '15px',
         fontWeight: '500',
         fontFamily: 'Arial, sans-serif',
