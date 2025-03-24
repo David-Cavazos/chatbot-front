@@ -34,7 +34,7 @@ const Chatbot = () => {
         }
         return storedUserId;
     });
-
+/*
     useEffect(() => {
         let timeout;
         
@@ -52,7 +52,7 @@ const Chatbot = () => {
       
         return () => clearTimeout(timeout);
       }, [isHovered]);
-
+*/
     const toggleMinimized = () => {
         setIsMinimized((prev) => {
             const newState = !prev;
@@ -260,7 +260,7 @@ const Chatbot = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: isHovered ? 'flex-start' : 'center',
-        
+        transition: 'max-width 0.3s ease, padding 0.3s ease',
         fontSize: '15px',
         fontWeight: '500',
         fontFamily: 'Arial, sans-serif',
