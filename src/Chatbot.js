@@ -20,6 +20,12 @@ const Chatbot = () => {
     const name = "Cassandra"; // Variable name for the chatbot
     const [lastSentPosition, setLastSentPosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
+    const [isStreaming, setIsStreaming] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [loadingDots, setLoadingDots] = useState("");
+
+
+
 
 
     const [session_id, setUserId] = useState(() => {
@@ -142,8 +148,18 @@ const Chatbot = () => {
 
     // Function to send user message to the backend and stream the response
     const handleSendMessage = async () => {
-        if (input.trim()) {
+        if (input.trim() && !isStreaming) {
             const userMessage = input.trim();
+            setIsStreaming(true);
+            setIsLoading(true);
+            setLoadingDots("");
+
+            let dotInterval = setInterval(() => {
+            setLoadingDots(prev => {
+                if (prev.length >= 3) return "";
+                return prev + ".";
+            });
+            }, 400);
 
             // Add user's message to the conversation
             setMessages((prev) => [...prev, { type: "user", content: userMessage }]);
@@ -178,6 +194,10 @@ const Chatbot = () => {
                     done = streamDone;
 
                     if (value) {
+                        if (isLoading) {
+                            setIsLoading(false);
+                            clearInterval(dotInterval);
+                          }
                         const chunk = decoder.decode(value, { stream: true });
                         streamedContent += chunk;
                         let cleanedContent = streamedContent;
@@ -213,7 +233,15 @@ const Chatbot = () => {
                 setStreamingMessage(""); // Clear temporary streaming message
             } catch (error) {
                 console.error("Error streaming response:", error);
+                setIsStreaming(false);
+                clearInterval(dotInterval);
+                setIsLoading(false);
             }
+            finally {
+                setIsStreaming(false); 
+                clearInterval(dotInterval);
+                setIsLoading(false);
+              }
         }
     };
 
@@ -314,6 +342,7 @@ const Chatbot = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
             }}
+            className="animated-gradient-header"
         >
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <img
@@ -392,6 +421,25 @@ const Chatbot = () => {
                     </div>
                 ))}
 
+                { isLoading && streamingMessage.length === 0 && (
+                <div
+                    style={{
+                    alignSelf: "flex-start",
+                    background: "#f1f1f1",
+                    color: "#000",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    marginBottom: "10px",
+                    maxWidth: "80%",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                    fontFamily: "Arial, sans-serif",
+                    }}
+                >
+                    ⌛ Generando respuesta{loadingDots}
+                </div>
+                )}
+
                 {/* Show streaming message at the bottom */}
                 {streamingMessage && (
                     <div
@@ -440,7 +488,9 @@ const Chatbot = () => {
                 />
                 <button
                     onClick={handleSendMessage}
+                    disabled={isStreaming}
                     style={{
+                        opacity: isStreaming ? 0.6 : 1,
                         marginLeft: '5px',
                         width: '40px',
                         height: '40px',

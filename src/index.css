@@ -49,8 +49,38 @@ code {
   }
 }
 
+
+@keyframes waveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
 .animated-gradient {
   background: linear-gradient(275deg, #ff002c, #d100ff, #ff002c);
   background-size: 300% 300%;
   animation: gradientMove 7s ease infinite;
 }
+
+.animated-gradient-header {
+  background: linear-gradient(275deg, #ff002c, #d100ff, #ff002c);
+  background-size: 300% 300%;
+  animation: waveGradient 7s ease infinite;
+}
+
+
