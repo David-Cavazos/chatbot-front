@@ -287,7 +287,7 @@ const Chatbot = () => {
         transition: 'max-width 0.3s ease, padding 0.3s ease',
         fontSize: '15px',
         fontWeight: '500',
-        fontFamily: 'Arial, sans-serif',
+        fontFamily: 'Inter, sans-serif',
         whiteSpace: isHovered ? 'normal' : 'nowrap',
         overflow: 'hidden',
         textAlign: 'left',
@@ -406,7 +406,7 @@ const Chatbot = () => {
                             alignSelf: message.type === "user" ? "flex-end" : "flex-start",
                             fontSize: "15px",
                             fontWeight: "500",
-                            fontFamily: "Arial, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                         }}
                     >
                         {message.isHtml ? (
@@ -433,7 +433,7 @@ const Chatbot = () => {
                     maxWidth: "80%",
                     fontSize: "15px",
                     fontWeight: "500",
-                    fontFamily: "Arial, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     }}
                 >
                     ⌛ Generando respuesta{loadingDots}
@@ -453,7 +453,7 @@ const Chatbot = () => {
                             alignSelf: "flex-start",
                             fontSize: "15px",
                             fontWeight: "500",
-                            fontFamily: "Arial, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                         }}
                         dangerouslySetInnerHTML={{
                             __html: streamingMessage,
@@ -483,7 +483,7 @@ const Chatbot = () => {
                         border: '1px solid #ccc',
                         fontSize: '15px',
                         fontWeight: '500',
-                        fontFamily: 'Arial, sans-serif',
+                        fontFamily: 'Inter, sans-serif',
                     }}
                 />
                 <button
