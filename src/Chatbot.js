@@ -2,7 +2,7 @@ import React, { useState, useEffect,useRef,useLayoutEffect } from 'react';
 import { Rnd } from 'react-rnd';
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "https://e3841e79-3eae-49cb-ae66-7474040b4750-00-2qhjyey8f19ud.worf.replit.dev";
+const BASE_URL = "http://3.148.173.182:8000";
 
 const Chatbot = () => {
     const location = useLocation();  // Gets the full URL
@@ -334,7 +334,6 @@ const Chatbot = () => {
             style={{
                 position: 'relative',
                 padding: '5px',
-                background: 'linear-gradient(150deg, #f00, #f0f)',
                 color: '#fff',
                 borderTopLeftRadius: '10px',
                 borderTopRightRadius: '10px',

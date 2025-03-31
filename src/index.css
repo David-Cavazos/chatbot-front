@@ -74,13 +74,13 @@ code {
 .animated-gradient {
   background: linear-gradient(275deg, #ff002c, #d100ff, #ff002c);
   background-size: 300% 300%;
-  animation: gradientMove 7s ease infinite;
+  animation: gradientMove 6s ease infinite;
 }
 
 .animated-gradient-header {
   background: linear-gradient(275deg, #ff002c, #d100ff, #ff002c);
   background-size: 300% 300%;
-  animation: waveGradient 7s ease infinite;
+  animation: waveGradient 6s ease infinite;
 }
 
 
