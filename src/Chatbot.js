@@ -2,7 +2,7 @@ import React, { useState, useEffect,useRef,useLayoutEffect } from 'react';
 import { Rnd } from 'react-rnd';
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "http://3.148.173.182:8000";
+const BASE_URL = "https://api.fundacioncr.org";
 
 const Chatbot = () => {
     const location = useLocation();  // Gets the full URL
